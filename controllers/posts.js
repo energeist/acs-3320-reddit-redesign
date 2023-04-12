@@ -29,4 +29,14 @@ module.exports = (app) => {
       })
       .catch(err => console.log(err))
   });
+
+  // Show a post with :id
+  app.get('/posts/:id', async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id).lean()
+      return res.render('posts-show', { post });
+    } catch {
+      console.log(err.message);
+    }   
+  });
 };
