@@ -2,9 +2,14 @@ const Post = require('../models/post');
 
 module.exports = (app) => {
 
-  // Root path
-  app.get('/', (req, res) => {
-    res.render('home');
+  // Index posts
+  app.get('/', async (req, res) => {
+    try {
+      const posts = await Post.find({}).lean();
+      return res.render('posts-index', { posts });
+    } catch (err) {
+      console.log(err.message);
+    }
   })
 
   // New post

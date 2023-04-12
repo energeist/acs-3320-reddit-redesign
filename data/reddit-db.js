@@ -7,13 +7,15 @@ mongoose.connect(
   url,
   {
     useNewUrlParser: true
-  },
-  function(err, db) {
-    assert.equal(null, err);
+  })
+  .then(() => {
     console.log('Connected successfully to database');
-    // db.close(); //turn on for testing
+  })
+  .catch(error => {
+    console.log("Failed to connect to database with error:", error);
   }
 );
+
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
 mongoose.set('debug', true);
 
