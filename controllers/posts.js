@@ -35,8 +35,25 @@ module.exports = (app) => {
     try {
       const post = await Post.findById(req.params.id).lean()
       return res.render('posts-show', { post });
-    } catch {
+    } catch(err) {
       console.log(err.message);
     }   
   });
-};
+
+  // SUBREDDIT
+  app.get('/n/:subreddit', async (req, res) => {
+    console.log(req.params.subreddit)
+    try {
+      let posts = await Post.find({ subreddit: req.params.subreddit }).lean()
+      console.log(posts)
+      return res.render('posts-index', { posts });
+    } catch(err) {
+      console.log(err.message);
+    }
+    // Post.find({ subreddit: req.params.subreddit }).lean()
+    // .then((posts) => res.render('posts-index', { posts }))
+    // .catch((err) => {
+    //   console.log(err);
+    // })
+  });
+}; //This close bracket is for the module.exports above and should always be last line
