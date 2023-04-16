@@ -18,16 +18,22 @@ module.exports = (app) => {
   })
 
   // Create a post
-  app.post('/posts/new', (req, res) => {
+  app.post('/posts/new', async (req, res) => {
     // INSTANTIATE INSTANCE OF POST MODEL
-    const post = new Post(req.body);
+    try {
+      const post = await new Post(req.body);
+      post.save();
+      return res.redirect('/')
+    } catch(err) {
+      console.log(err.message);
+    }
     // SAVE INSTANCE OF POST MODEL TO DB AND REDIRECT TO THE ROOT
     // console.log(post)
-    post.save()
-      .then(() => {
-        res.redirect('/')
-      })
-      .catch(err => console.log(err))
+    // post.save()
+    //   .then(() => {
+    //     res.redirect('/')
+    //   })
+    //   .catch(err => console.log(err))
   });
 
   // Show a post with :id
