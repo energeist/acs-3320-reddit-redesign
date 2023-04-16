@@ -2,5 +2,9 @@
   <div class="col-sm-6 col-sm-offset-3">
     <a href="{{post.url}}" class="lead">{{post.title}}</a>
     <p>{{post.summary}}</p>
+    <p>Post subreddits:</p>
+    {{#each post.subreddits}}
+      <a href="/n/{{this}}">{{this}}</a><br>
+    {{/each}}
   </div>
 </div>
