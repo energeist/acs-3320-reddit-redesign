@@ -2,10 +2,18 @@
   <div class="col-sm-6 col-sm-offset-3">
     <a href="{{post.url}}" class="lead">{{post.title}}</a>
     <p>{{post.summary}}</p>
-    <p class="mb-0">Post subreddits:</p>
-    {{#each post.subreddits}}
-      <a href="/n/{{this}}">{{this}}</a><br>
-    {{/each}}
+    {{#if post.subreddits}}
+      <p class="mb-0">Post subreddits:</p>
+      {{#each post.subreddits}}
+        <a href="/n/{{this}}">{{this}}</a><br>
+      {{/each}}
+    {{/if}}
+    {{#if post.comments}}
+      <p class="mb-0">Comments:</p>
+      {{#each post.comments}}
+        {{this.content}}
+      {{/each}}
+    {{/if}}
     <p class="mt-2 mb-0">Add a comment:</p>
     <form action="/posts/{{post._id}}/comments" method="post">
       <textarea class='form-control' name="content" placeholder="Comment"></textarea>
