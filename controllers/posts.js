@@ -21,6 +21,8 @@ module.exports = (app) => {
   app.post('/posts/new', async (req, res) => {
     // INSTANTIATE INSTANCE OF POST MODEL
     try {
+      subredditArray = req.body.subreddits.replaceAll(' ','').split(',')
+      req.body.subreddits = subredditArray
       const post = await new Post(req.body);
       post.save();
       return res.redirect('/')
@@ -48,9 +50,9 @@ module.exports = (app) => {
 
   // SUBREDDIT
   app.get('/n/:subreddit', async (req, res) => {
-    console.log(req.params.subreddit)
+    console.log(req.params)
     try {
-      let posts = await Post.find({ subreddit: req.params.subreddit }).lean()
+      let posts = await Post.find({ subreddits: req.params.subreddit }).lean()
       console.log(posts)
       return res.render('posts-index', { posts });
     } catch(err) {
