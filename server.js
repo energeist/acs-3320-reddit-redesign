@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 // Require controllers
 require('./controllers/posts')(app);
 require('./controllers/users')(app);
+require('./controllers/comments')(app);
 
 // Routes here
 app.get('/', (req, res) => {
