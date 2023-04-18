@@ -8,6 +8,7 @@
             <a href="/posts/{{this._id}}">{{this.title}}</a>
           </div>
           <a href="{{this.url}}" target="_blank">{{this.url}}</a>
+          <div><small>{{this.author.username}}</small></div>
           <p>Subreddit tags: </p>
           {{#each this.subreddits}}
             <a href="/n/{{this}}">{{this}}</a><span>  </span>

@@ -1,4 +1,6 @@
 const Post = require('../models/post');
+const User = require('../models/user');
+const Comment = require('../models/comment');
 
 module.exports = (app) => {
 
@@ -6,7 +8,7 @@ module.exports = (app) => {
   app.get('/', async (req, res) => {
     const currentUser = req.user;
     try {
-      const posts = await Post.find({}).lean();
+      const posts = await Post.find({}).lean().populate('author');
       return res.render('posts-index', { posts, currentUser });
     } catch (err) {
       console.log(err.message);
@@ -24,12 +26,17 @@ module.exports = (app) => {
     // INSTANTIATE INSTANCE OF POST MODEL
     if (req.user) {
       try {
+        const userId = req.user._id;
         const currentUser = req.user;
         subredditArray = req.body.subreddits.replaceAll(' ','').split(',');
         req.body.subreddits = subredditArray;
         const post = await new Post(req.body);
-        post.save();
-        return res.redirect('/', { currentUser });
+        post.author = userId;
+        const savedPost = await post.save();
+        user = await User.findById(userId);
+        user.posts.unshift(post);
+        const savedUser = await user.save();
+        return res.redirect('/');
       } catch(err) {
         console.log(err.message);
       }
@@ -42,7 +49,7 @@ module.exports = (app) => {
   app.get('/posts/:id', async (req, res) => {
     try {
       const currentUser = req.user;
-      const post = await Post.findById(req.params.id).lean().populate('comments');
+      const post = await Post.findById(req.params.id).lean().populate({ path:'comments', populate: { path: 'author' } }).populate('author');
       return res.render('posts-show', { post, currentUser });
     } catch(err) {
       console.log(err.message);

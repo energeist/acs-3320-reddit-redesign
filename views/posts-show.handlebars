@@ -12,6 +12,7 @@
       <p class="mb-0">Comments:</p>
       {{#each post.comments}}
         {{this.content}}
+        <div><small>{{this.author.username}}</small></div>
       {{/each}}
     {{/if}}
     <p class="mt-2 mb-0">Add a comment:</p>
