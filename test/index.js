@@ -24,4 +24,8 @@ describe('site', function () {
         return done(); // Call done if the test completed successfully.
       });
   });
+
+  after(function () {
+    agent.close();
+  });
 });
