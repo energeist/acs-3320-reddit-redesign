@@ -30,60 +30,59 @@ module.exports = (app) => {
   // LOGIN FORM
   app.get('/login', (req, res) => res.render('login'));
   // // LOGIN POST ACTION
-  // app.post('/login', async (req, res) => {
-  //   try {
-  //     const { username, password } = req.body;
-  //     foundUser = await User.findOne({ username }, 'username password')
-  //   } catch(err) {
-  //     console.log(err);
-  //     return res.status(401).send({ message: 'Wrong Username or Password' });
-  //   };
-  //   try {
-  //     user.comparePassword(password, (err, isMatch) => {
-  //       if (!isMatch) {
-  //         // Password does not match
-  //         return res.status(401).send({ message: 'Wrong Username or password' });
+  // app.post('/login', (req, res) => {
+  //   const { username, password } = req.body;
+  //   // Find this user name
+  //   User.findOne({ username }, 'username password')
+  //     .then((user) => {
+  //       if (!user) {
+  //         // User not found
+  //         return res.status(401).send({ message: 'Wrong Username or Password' });
   //       }
-  //       // Create a token
-  //       const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
-  //         expiresIn: '60 days',
+  //       // Check the password
+  //       user.comparePassword(password, (err, isMatch) => {
+  //         if (!isMatch) {
+  //           // Password does not match
+  //           return res.status(401).send({ message: 'Wrong Username or password' });
+  //         }
+  //         // Create a token
+  //         const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
+  //           expiresIn: '60 days',
+  //         });
+  //         // Set a cookie and redirect to root
+  //         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
+  //         return res.redirect('/');
   //       });
-  //       // Set a cookie and redirect to root
-  //       res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-  //       return res.redirect('/');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
   //     });
-  //   } catch(err) {
-  //     console.log(err);
-  //     // return res.status(401).send({ message: 'Wrong Username or Password' });
-  //   };
-  // });
-  // LOGIN
-  app.post('/login', (req, res) => {
+  //   });
+
+  app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    // Find this user name
-    User.findOne({ username }, 'username password')
-      .then((user) => {
-        if (!user) {
-          // User not found
-          return res.status(401).send({ message: 'Wrong Username or Password' });
+    try {
+      const user = await User.findOne({ username }, 'username password');
+      if (!user) {
+        return res.status(401).send({ message: 'Wrong Username or Password' });
+      }
+      user.comparePassword(password, (err, isMatch) => {
+        if (!isMatch) {
+          return res.status(401).send({ message: 'Wrong Username or password' });
         }
-        // Check the password
-        user.comparePassword(password, (err, isMatch) => {
-          if (!isMatch) {
-            // Password does not match
-            return res.status(401).send({ message: 'Wrong Username or password' });
-          }
-          // Create a token
+        if (req.body.rememberMe) {
           const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
             expiresIn: '60 days',
           });
-          // Set a cookie and redirect to root
           res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-          return res.redirect('/');
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+        } else {
+          const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET);
+          res.cookie('nToken', token, { httpOnly: true }); //JWT token should expire when browser window is closed
+        }
+        return res.redirect('/');
       });
+    } catch (err) {
+      console.log(err);
+    }
   });
 };

@@ -15,6 +15,7 @@ require('./data/reddit-db');
 const hbs = handlebars.create({
     helpers: {}
 });
+const checkAuth = require('./middleware/checkAuth');
 
 // App config here
 app.engine('handlebars', hbs.engine);
@@ -23,6 +24,7 @@ app.set('views', './views');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // Add this after you initialize express.
+app.use(checkAuth);
 
 // Require controllers
 require('./controllers/auth.js')(app);
