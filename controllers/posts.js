@@ -30,12 +30,12 @@ module.exports = (app) => {
         const currentUser = req.user;
         subredditArray = req.body.subreddits.replaceAll(' ','').split(',');
         req.body.subreddits = subredditArray;
-        const post = await new Post(req.body);
+        const post = new Post(req.body);
         post.author = userId;
-        const savedPost = await post.save();
-        user = await User.findById(userId);
+        await post.save();
+        const user = await User.findById(userId);
         user.posts.unshift(post);
-        const savedUser = await user.save();
+        await user.save();
         return res.redirect('/');
       } catch(err) {
         console.log(err.message);
@@ -49,7 +49,7 @@ module.exports = (app) => {
   app.get('/posts/:id', async (req, res) => {
     try {
       const currentUser = req.user;
-      const post = await Post.findById(req.params.id).lean().populate({ path:'comments', populate: { path: 'author' } }).populate('author');
+      const post = await Post.findById(req.params.id).populate('comments').lean();
       return res.render('posts-show', { post, currentUser });
     } catch(err) {
       console.log(err.message);
