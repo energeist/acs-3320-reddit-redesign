@@ -30,6 +30,7 @@ app.use(checkAuth);
 require('./controllers/auth.js')(app);
 require('./controllers/posts')(app);
 require('./controllers/comments')(app);
+require('./controllers/replies')(app);
 
 // Routes here
 app.get('/', (req, res) => {
