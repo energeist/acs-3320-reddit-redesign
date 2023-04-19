@@ -12,13 +12,8 @@
     {{#if post.comments}}
       <p class="mb-0">Comments:</p>
         {{#each post.comments}}
-          {{> comment comment=this postId=../post._id}}
+          {{> comment comment=this postId=../post._id currentUser=../currentUser}}
         {{/each}}
-        {{!-- {{#each post.comments}}
-            <p>{{this.content}}</p>
-            <p class="text-right">{{this.author.username}}</p>
-            <a href="/posts/{{../post._id}}/comments/{{this._id}}/replies/new">Reply</a>
-        {{/each}} --}}
     {{/if}}
     <p class="mt-2 mb-0">Add a comment:</p>
     <form action="/posts/{{post._id}}/comments" method="post">
