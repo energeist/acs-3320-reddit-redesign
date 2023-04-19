@@ -31,6 +31,9 @@ module.exports = (app) => {
         subredditArray = req.body.subreddits.replaceAll(' ','').split(',');
         req.body.subreddits = subredditArray;
         const post = new Post(req.body);
+        post.upVotes = [];
+        post.downVotes = [];
+        post.voteScore = 0;
         post.author = userId;
         await post.save();
         const user = await User.findById(userId);
@@ -64,6 +67,32 @@ module.exports = (app) => {
       return res.render('posts-index', { posts, currentUser });
     } catch(err) {
       console.log(err.message);
+    }
+  });
+
+  //Updoot
+  app.put('/posts/:id/vote-up', async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      post.upVotes.push(req.user._id);
+      post.voteScore += 1;
+      await post.save();
+      return res.status(200);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  //Downdoot
+  app.put('/posts/:id/vote-down', async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      post.downVotes.push(req.user._id);
+      post.voteScore -= 1;
+      await post.save();
+      return res.status(200);
+    } catch (err) {
+      console.log(err);
     }
   });
   

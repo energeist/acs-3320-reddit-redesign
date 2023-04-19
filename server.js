@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // Add this after you initialize express.
 app.use(checkAuth);
+app.use(express.static('public'));
 
 // Require controllers
 require('./controllers/auth.js')(app);

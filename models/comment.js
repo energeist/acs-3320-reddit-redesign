@@ -5,6 +5,9 @@ const commentSchema = new Schema({
   content: { type: String, required: true },
   author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  upVotes : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  downVotes : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  voteScore: { type: Number },
 }, { timestamps: true });
 
 commentSchema
@@ -12,5 +15,5 @@ commentSchema
   .pre('find', Populate('author'))
   .pre('findOne', Populate('comments'))
   .pre('find', Populate('comments'));
-  
+
 module.exports = model('Comment', commentSchema);
