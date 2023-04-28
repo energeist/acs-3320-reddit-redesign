@@ -1,9 +1,15 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
-    <h1>Hello Posts!</h1>
+    <h1>Hello 
+      {{#if currentUser}}
+        {{currentUser.username}}!
+      {{else}}
+        Anon!
+      {{/if}}
+    </h1>
     {{#each posts}}
-      <div class="border m-1">
-        <li class="list-group-item">
+      <div class="d-flex flex-row-reverse justify-content-end border m-1">
+        <div>
           <div class="lead">
             <a href="/posts/{{this._id}}">{{this.title}}</a>
           </div>
@@ -11,21 +17,18 @@
           <div><small>{{this.author.username}}</small></div>
           <p>Subreddit tags: </p>
           {{#each this.subreddits}}
-            <a href="/n/{{this}}">{{this}}</a><span>  </span>
+            <a href="/n/{{this}}" class="me-2">{{this}}</a>
           {{/each}}
-            <li class="list-group-item">
-              <div class="text-right">
-                <a href="/n/{{post.subreddit}}">{{post.subreddit}}<a>
-              </div>
-              <form class="vote-up" data-id="{{this._id}}">
-                <button type="submit">🔼</button>
-              </form>
-              #{{this.voteScore}}
-              <form class="vote-down" data-id="{{this._id}}">
-                <button type="submit">🔽</button>
-              </form>
-            </li>
-        </li>
+        </div>
+        <div class="d-flex flex-column justify-content-center mx-4">
+          <form class="vote-up" data-id="{{this._id}}">
+            <button type="submit" class="btn btn-outline-dark">🔼</button>
+          </form>
+          #{{this.voteScore}}
+          <form class="vote-down" data-id="{{this._id}}">
+            <button type="submit" class="btn btn-outline-dark">🔽</button>
+          </form>
+        </div>
       </div>
     {{/each}}
   </div>

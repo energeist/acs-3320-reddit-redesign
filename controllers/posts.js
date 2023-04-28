@@ -9,7 +9,9 @@ module.exports = (app) => {
     const currentUser = req.user;
     try {
       const posts = await Post.find({}).lean().populate('author');
-      return res.render('posts-index', { posts, currentUser });
+      return res.render('posts-index', { posts: posts.map(post => ({
+        ...post
+      })), currentUser });
     } catch (err) {
       console.log(err.message);
     }
@@ -53,7 +55,11 @@ module.exports = (app) => {
     try {
       const currentUser = req.user;
       const post = await Post.findById(req.params.id).populate('comments').lean();
-      return res.render('posts-show', { post, currentUser });
+      return res.render('posts-show', { 
+        post, 
+        currentUser, 
+        upvoted: post.upVotes.includes(currentUser._id),
+        downvoted: post.downVotes.includes(currentUser._id)});
     } catch(err) {
       console.log(err.message);
     }   
@@ -74,8 +80,15 @@ module.exports = (app) => {
   app.put('/posts/:id/vote-up', async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      post.upVotes.push(req.user._id);
-      post.voteScore += 1;
+      if (!post.upVotes.includes(req.user._id)) {
+        if (post.downVotes.includes(req.user._id)) {
+          post.downVotes.pop(req.user._id)
+          post.voteScore += 1;
+        } else {
+          post.upVotes.push(req.user._id);
+          post.voteScore += 1;
+        };
+      };
       await post.save();
       return res.status(200);
     } catch (err) {
@@ -86,9 +99,16 @@ module.exports = (app) => {
   //Downdoot
   app.put('/posts/:id/vote-down', async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      post.downVotes.push(req.user._id);
-      post.voteScore -= 1;
+      const post = await Post.findById(req.params.id);  
+      if (!post.downVotes.includes(req.user._id)) {
+        if (post.upVotes.includes(req.user._id)) {
+          post.upVotes.pop(req.user._id)
+          post.voteScore -= 1;
+        } else {
+          post.downVotes.push(req.user._id);
+          post.voteScore -= 1;
+        }
+      };
       await post.save();
       return res.status(200);
     } catch (err) {
