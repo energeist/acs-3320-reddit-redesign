@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('.vote-up').submit(function(e) {
+    e.preventDefault();
     const postId = $(this).data('id');
     $.ajax({
       type: 'PUT',
@@ -13,6 +14,7 @@ $(document).ready(function() {
     });
   });
   $('.vote-down').submit(function(e) {
+    e.preventDefault();
     const postId = $(this).data('id');
     $.ajax({
       type: 'PUT',
