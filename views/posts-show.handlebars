@@ -30,6 +30,7 @@
           {{> comment comment=this postId=../post._id currentUser=../currentUser}}
         {{/each}}
     {{/if}}
+    {{#if currentUser}}
     <p class="mt-2 mb-0">Add a comment:</p>
     <form action="/posts/{{post._id}}/comments" method="post">
       <textarea class='form-control' name="content" placeholder="Comment"></textarea>
@@ -37,5 +38,6 @@
         <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </form>
+    {{/if}}
   </div>
 </div>

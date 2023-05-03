@@ -1,30 +1,24 @@
-$(document).ready(function() {
-  $('.vote-up').submit(function(e) {
-    e.preventDefault();
-    const postId = $(this).data('id');
-    $.ajax({
-      type: 'PUT',
-      url: 'posts/' + postId + '/vote-up',
-      success: function(data) {
-        console.log('voted up!');
-      },
-      error: function(err) {
-        console.log(err.messsage);
-      }
-    });
-  });
-  $('.vote-down').submit(function(e) {
-    e.preventDefault();
-    const postId = $(this).data('id');
-    $.ajax({
-      type: 'PUT',
-      url: 'posts/' + postId + '/vote-down',
-      success: function(data) {
-        console.log('voted down!');
-      },
-      error: function(err) {
-        console.log(err.messsage);
-      }
-    });
-  });
-});
+document.body.addEventListener('submit', e => {
+  const postId = e.target.dataset.id
+  // console.log(e.target)
+  // console.log(postId);
+	if (e.target.matches('.vote-up')) {
+		e.preventDefault();
+		voteUp(postId)
+	} else if (e.target.matches('.vote-down')) {
+		 e.preventDefault();
+    voteDown(postId)
+	}
+})
+
+async function voteUp(postId) {
+  console.log('voted up!');
+	const res = await fetch(`posts/${postId}/vote-up`, { method: 'PUT' })
+	const data = await res.json()
+}
+
+async function voteDown(postId) {
+  console.log('voted down!');
+	const res = await fetch(`posts/${postId}/vote-down`, { method: 'PUT' })
+	const data = await res.json()
+}

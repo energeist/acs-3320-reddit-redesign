@@ -57,7 +57,7 @@ module.exports = (app) => {
       return res.render('posts-show', { 
         post, 
         currentUser, 
-        upvoted: currentUser ? post.upVotes.includes(currentUser._id) : null,
+        upvoted: currentUser ? post.upVotes.includes(currentUser._id) : null, // still working on this
         downvoted: currentUser ? post.downVotes.includes(currentUser._id) : null});
     } catch(err) {
       console.log(err.message);
@@ -77,8 +77,9 @@ module.exports = (app) => {
 
   //Updoot
   app.put('/posts/:id/vote-up', async (req, res) => {
+    console.log("voting up!")
     const currentUser = req.user;
-    if (currentUser) {
+    if (currentUser) { // gated behind login to prevent mongoose from seizing
       try {
         const post = await Post.findById(req.params.id);
         if (!post.upVotes.includes(req.user._id)) {
@@ -100,8 +101,9 @@ module.exports = (app) => {
 
   //Downdoot
   app.put('/posts/:id/vote-down', async (req, res) => {
+    console.log("voting down!")
     const currentUser = req.user;
-    if (currentUser) {
+    if (currentUser) { // gated behind login to prevent mongoose from seizing
       try {
         const post = await Post.findById(req.params.id);  
         if (!post.downVotes.includes(req.user._id)) {
