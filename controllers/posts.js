@@ -1,6 +1,5 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const Comment = require('../models/comment');
 
 module.exports = (app) => {
 
@@ -58,8 +57,8 @@ module.exports = (app) => {
       return res.render('posts-show', { 
         post, 
         currentUser, 
-        upvoted: post.upVotes.includes(currentUser._id),
-        downvoted: post.downVotes.includes(currentUser._id)});
+        upvoted: currentUser ? post.upVotes.includes(currentUser._id) : null,
+        downvoted: currentUser ? post.downVotes.includes(currentUser._id) : null});
     } catch(err) {
       console.log(err.message);
     }   
@@ -78,41 +77,47 @@ module.exports = (app) => {
 
   //Updoot
   app.put('/posts/:id/vote-up', async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);
-      if (!post.upVotes.includes(req.user._id)) {
-        if (post.downVotes.includes(req.user._id)) {
-          post.downVotes.pop(req.user._id)
-          post.voteScore += 1;
-        } else {
-          post.upVotes.push(req.user._id);
-          post.voteScore += 1;
+    const currentUser = req.user;
+    if (currentUser) {
+      try {
+        const post = await Post.findById(req.params.id);
+        if (!post.upVotes.includes(req.user._id)) {
+          if (post.downVotes.includes(req.user._id)) {
+            post.downVotes.pop(req.user._id)
+            post.voteScore += 1;
+          } else {
+            post.upVotes.push(req.user._id);
+            post.voteScore += 1;
+          };
         };
-      };
-      await post.save();
-      return res.status(200);
-    } catch (err) {
-      console.log(err);
+        await post.save();
+        return res.status(200);
+      } catch (err) {
+        console.log(err);
+      }
     }
   });
 
   //Downdoot
   app.put('/posts/:id/vote-down', async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);  
-      if (!post.downVotes.includes(req.user._id)) {
-        if (post.upVotes.includes(req.user._id)) {
-          post.upVotes.pop(req.user._id)
-          post.voteScore -= 1;
-        } else {
-          post.downVotes.push(req.user._id);
-          post.voteScore -= 1;
-        }
-      };
-      await post.save();
-      return res.status(200);
-    } catch (err) {
-      console.log(err);
+    const currentUser = req.user;
+    if (currentUser) {
+      try {
+        const post = await Post.findById(req.params.id);  
+        if (!post.downVotes.includes(req.user._id)) {
+          if (post.upVotes.includes(req.user._id)) {
+            post.upVotes.pop(req.user._id)
+            post.voteScore -= 1;
+          } else {
+            post.downVotes.push(req.user._id);
+            post.voteScore -= 1;
+          }
+        };
+        await post.save();
+        return res.status(200);
+      } catch (err) {
+        console.log(err);
+      }
     }
   });
   
