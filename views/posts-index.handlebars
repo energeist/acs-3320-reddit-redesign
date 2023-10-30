@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
+<div class="">
+  <div class="">
     <h1>Hello 
       {{#if currentUser}}
         {{currentUser.username}}!
@@ -8,25 +8,25 @@
       {{/if}}
     </h1>
     {{#each posts}}
-      <div class="d-flex flex-row-reverse justify-content-end border m-1">
+      <div class="">
         <div>
-          <div class="lead">
+          <div class="">
             <a href="/posts/{{this._id}}">{{this.title}}</a>
           </div>
           <a href="{{this.url}}" target="_blank">{{this.url}}</a>
           <div><small>{{this.author.username}}</small></div>
           <p>Subreddit tags: </p>
           {{#each this.subreddits}}
-            <a href="/n/{{this}}" class="me-2">{{this}}</a>
+            <a href="/n/{{this}}" class="">{{this}}</a>
           {{/each}}
         </div>
-        <div class="d-flex flex-column justify-content-center mx-4">
-          <form class="vote-up" data-id="{{this._id}}">
-            <button type="submit" class="btn btn-outline-dark">🔼</button>
+        <div class="">
+          <form class="" data-id="{{this._id}}">
+            <button type="submit" class="">🔼</button>
           </form>
           #{{this.voteScore}}
-          <form class="vote-down" data-id="{{this._id}}">
-            <button type="submit" class="btn btn-outline-dark">🔽</button>
+          <form class="" data-id="{{this._id}}">
+            <button type="submit" class="">🔽</button>
           </form>
         </div>
       </div>
