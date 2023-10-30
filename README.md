@@ -4,6 +4,9 @@ This project was originally completed for ACS-2230, and has had a design overhau
 
 Original screenshots:
 
+![Alt text](image.png)
+
+![Alt text](image-1.png)
 
 New screenshots:
 
