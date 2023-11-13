@@ -1,6 +1,6 @@
-<div class="">
+<div class="comment-main">
   <p>{{comment.content}}</p>
-  <p class="">{{comment.author.username}}</p>
+  <p class="comment-info">{{comment.author.username}}</p>
   {{#if currentUser}}
     <a href="/posts/{{postId}}/comments/{{comment._id}}/replies/new">Reply</a>
   {{else}}

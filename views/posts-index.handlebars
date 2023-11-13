@@ -1,5 +1,5 @@
 <div class="">
-  <div class="">
+  <div class="index-header">
     <h1>Hello 
       {{#if currentUser}}
         {{currentUser.username}}!
@@ -8,9 +8,9 @@
       {{/if}}
     </h1>
     {{#each posts}}
-      <div class="">
+      <div class="index-posts-container">
         <div>
-          <div class="">
+          <div class="index-post">
             <a href="/posts/{{this._id}}">{{this.title}}</a>
           </div>
           <a href="{{this.url}}" target="_blank">{{this.url}}</a>
@@ -22,14 +22,14 @@
         </div>
         <div class="">
           <form class="" data-id="{{this._id}}">
-            <button type="submit" class="">🔼</button>
+            <button type="submit" class="index-upvote-button">🔼</button>
           </form>
           #{{this.voteScore}}
           <form class="" data-id="{{this._id}}">
-            <button type="submit" class="">🔽</button>
+            <button type="submit" class="index-downvote-button">🔽</button>
           </form>
         </div>
       </div>
-    {{/each}}
+    {{/each}}voting-section
   </div>
 </div>
