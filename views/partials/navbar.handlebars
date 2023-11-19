@@ -1,17 +1,17 @@
 <nav class="nav-bar">
-  <div class="">
-    <a class="" href="/">Reddit.js</a>
-      <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <div class="nav-bar-contents">
+    <a class="title" href="/">Reddit Reskin</a>
+      {{!-- <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class=""></span>
-      </button>
-    <div class="" id="navbarSupportedContent">
-      {{#if currentUser}}
-      <ul class="">
-        <li><a href="/posts/new" class="">New Post</a></li>
-      </ul>
-      {{/if}}
-    </div>
+      </button> --}}
+
+    {{#if currentUser}}
     <ul class="">
+      <li><a href="/posts/new" class="">New Post</a></li>
+    </ul>
+    {{/if}}
+
+    <ul class="nav-items">
       {{#if currentUser }}
         <li><a href="/logout" class="">Logout</a></li>
       {{else}}
