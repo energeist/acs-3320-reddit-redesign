@@ -5,7 +5,6 @@ const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-app.use(express.static('public'));
 
 // Set db
 require('./data/reddit-db');

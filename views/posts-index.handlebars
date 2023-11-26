@@ -1,33 +1,45 @@
 <div class="">
   <div class="index-header">
-    <h1>Hello 
-      {{#if currentUser}}
-        {{currentUser.username}}!
-      {{else}}
-        Anon!
-      {{/if}}
-    </h1>
+    <h1>The Front Page of the Internet</h1>
     {{#each posts}}
       <div class="index-posts-container">
         <div>
           <div class="index-post">
-            <a href="/posts/{{this._id}}">{{this.title}}</a>
-          </div>
-          <a href="{{this.url}}" target="_blank">{{this.url}}</a>
-          <div><small>{{this.author.username}}</small></div>
-          <p>Subreddit tags: </p>
+            <a class="post-title-link" href="/posts/{{this._id}}">{{this.title}}</a>
+            <span> - in 
+              {{#if this.subreddits.length}}
+                {{this.subreddits.length}} subreddits:
+              {{else}}
+                1 subreddit:
+              {{/if}}
+            </span>
           {{#each this.subreddits}}
-            <a href="/n/{{this}}" class="">{{this}}</a>
+            <a href="/n/{{this}}" class="">/n/{{this}}</a>
           {{/each}}
+          </div>
+          <a href="{{this.url}}" target="_blank" class="url-text">{{this.url}}</a>
+          <div>
+            {{#if this.author.username}}
+              <small>Author: {{this.author.username}}</small>
+            {{else}}
+              <small>Author: [deleted]</small>
+            {{/if}}
+          </div>
         </div>
-        <div class="">
-          <form class="" data-id="{{this._id}}">
-            <button type="submit" class="index-upvote-button">🔼</button>
-          </form>
-          #{{this.voteScore}}
-          <form class="" data-id="{{this._id}}">
-            <button type="submit" class="index-downvote-button">🔽</button>
-          </form>
+        <div class="index-post-bottom">
+          <div class="index-voting">
+            <form class="" data-id="{{this._id}}">
+              <button type="submit" class="index-upvote-button"></button>
+            </form>
+            {{this.voteScore}}
+            <form class="" data-id="{{this._id}}">
+              <button type="submit" class="index-downvote-button"></button>
+            </form>
+          </div>
+          <div class="index-comment-summary">
+            <div class="comment-icon"></div>
+            <span class="comment-count">{{this.comments.length}}</span>
+          </div>
         </div>
       </div>
     {{/each}}
