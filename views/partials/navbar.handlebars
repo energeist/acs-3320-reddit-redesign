@@ -1,20 +1,23 @@
 <nav class="nav-bar">
   <div class="nav-bar-contents">
-    <div class="logo"></div>
-    <a class="home" href="/">Home</a>
-    {{#if currentUser}}
-    <ul class="">
-      <li><a href="/posts/new" class="">New Post</a></li>
-    </ul>
-    {{/if}}
+    <span class="logo"></span>
+    <div class="nav-buttons">
+      <a class="home" href="/">Home</a>
+      {{!-- {{#if currentUser}}
+      <ul class="">
+        
+      </ul>
+      {{/if}} --}}
 
-    <ul class="nav-items">
-      {{#if currentUser }}
-        <li><a href="/logout" class="">Logout</a></li>
-      {{else}}
-        <li><a href="/login" class="">Login</a></li>
-        <li><a href="/sign-up" class="">Sign Up</a></li>
-      {{/if}}
-    </ul>
+      <ul class="nav-items">
+        {{#if currentUser }}
+          <li><a href="/posts/new" class="">New Post</a></li>
+          <li><a href="/logout" class="">Logout</a></li>
+        {{else}}
+          <li><a href="/login" class="">Login</a></li>
+          <li><a href="/sign-up" class="">Sign Up</a></li>
+        {{/if}}
+      </ul>
+    </div>
   </div>
 </nav>

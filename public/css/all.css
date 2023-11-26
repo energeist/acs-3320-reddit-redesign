@@ -26,7 +26,6 @@ body {
 .nav-bar {
   /* display: inline-flex; */
   margin: auto;
-  border: 3px solid red;
   background-color: white;
   align-items: center;
 }
@@ -38,6 +37,14 @@ body {
   background-size: fill;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.nav-buttons {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 50px;
 }
 
 .home {
