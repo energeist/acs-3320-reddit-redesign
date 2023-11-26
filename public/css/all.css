@@ -209,3 +209,13 @@ small {
 .url-text {
   font-size: 0.75rem;
 }
+
+/* smaller screens and tablets */
+@media only screen and (max-width: 600px) {
+  .nav-bar-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
