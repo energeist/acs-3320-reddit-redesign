@@ -30,16 +30,16 @@ body {
 }
 
 .logo {
-  width: 248px;
+  min-width: 248px;
   height: 60px;
   background-image: url("/images/logo.png");
-  background-size: fill;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .nav-buttons {
   display: inline-flex;
+  width: 90%;
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
@@ -57,11 +57,9 @@ body {
   width: 32px;
   height: 32px;
   background-size: cover;
-  /* margin-right: 37px; */
   position: absolute;
   left: -37px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
 }
 
 .nav-bar > div {
@@ -73,18 +71,14 @@ body {
   margin: auto;
 }
 
-ul, li {
-  list-style-type: none;
-}
-
-.nav-items {
+ul, li {    background-size: cover;
   min-width: 100px;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.nav-items > li > a, .home {
+.nav-button, .home {
   border: 1px solid black;
   border-radius: 3px;
   background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
@@ -95,10 +89,23 @@ ul, li {
   color: black;
 }
 
+.home {
+  margin-left: 10px;
+}
+
+.nav-button:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.home:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
 /* index posts */
 
 .index-posts-container {
-  border: 1px solid pink;
   background-color: white;
   border-radius: 10px;
   margin: 10px;
@@ -108,10 +115,6 @@ ul, li {
 
 .index-posts-container:hover {
   background-color: #cccccc;
-}
-
-.comment-indent {
-  margin-left: 20px;
 }
 
 .post-title-link {
@@ -210,6 +213,10 @@ small {
 
 /* post styles */
 
+textarea {
+  width: calc(100% - 6px);
+}
+
 .post-main {
   padding: 10px;
 }
@@ -230,15 +237,28 @@ small {
 }
 
 /* comment styles */
+.comment-wrapper {
+  display: flex;
+  flex-direction: row;
+}
 
 .comment-main {
-  border: 1px dashed black;
-  margin: 5px 0 5px 8px;
+  background-color: white;
+  margin: 5px 0px 0px 8px;
+  border: 1px solid black;
+  border-radius: 5px;
   padding: 5px;
+  flex: 1;
+  flex-direction: column;
 }
 
 .comment-main:hover {
   background-color: #cccccc;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.comment-indent {
+  min-width: 10px;
 }
 
 /* smaller screens and tablets */
@@ -250,4 +270,14 @@ small {
     justify-content: center;
     align-items: center;
   }
+
+  .home::before {
+    position: absolute;
+    left: -37px;
+    top: 0;
+  }
+
+  .comment-main {
+    margin: 5px 0px 0px 0px;
+  };
 }

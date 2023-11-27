@@ -45,9 +45,9 @@
     {{#if currentUser}}
     <p class="">Add a comment:</p>
     <form action="/posts/{{post._id}}/comments" method="post">
-      <textarea class="" name="content" placeholder="Comment"></textarea>
+      <textarea class="comment-box" name="content" placeholder="Comment"></textarea>
       <div class="comment-submit-button">
-        <button type="submit" class="">Save</button>
+        <button type="submit" class="">Post!</button>
       </div>
     </form>
     {{/if}}
