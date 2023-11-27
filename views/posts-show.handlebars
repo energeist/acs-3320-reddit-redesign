@@ -2,25 +2,37 @@
   <div class="post-main">
     <div class="post-content">
       <div>
-        <a href="{{post.url}}" class="">{{post.title}}</a>
-        <p>{{post.summary}}</p>
-        <p><small>{{post.author.username}}</small></p>
+        <a class="post-title-link" href="{{post.url}}">{{post.title}}</a>
         {{#if post.subreddits}}
-          <p class="">Post subreddits:</p>
+          <span> - in 
+              {{#if post.subreddits.length}}
+                {{post.subreddits.length}} subreddits:
+              {{else}}
+                1 subreddit:
+              {{/if}}
+          </span>
           <div>
           {{#each post.subreddits}}
-            <a href="/n/{{this}}" class="">{{this}}</a>
+            <a href="/n/{{this}}" class="">/n/{{this}}</a>
           {{/each}}
           </div>
         {{/if}}
+        <p>{{post.summary}}</p>
+        <p>
+          {{#if this.author.username}}
+            <small>Author: {{this.author.username}}</small>
+          {{else}}
+            <small>Author: [deleted]</small>
+          {{/if}}
+        </p> 
       </div>
-      <div class="voting-forms">
+      <div class="post-voting">
         <form class="upvote-form" data-id="{{post._id}}">
-          <button type="submit" class="upvote-button">🔼</button>
+          <button type="submit" class="index-upvote-button"></button>
         </form>
-        #{{post.voteScore}}
+        {{post.voteScore}}
         <form class="downvote-form" data-id="{{post._id}}">
-          <button type="submit" class="downvote-button">🔽</button>
+          <button type="submit" class="index-downvote-button"></button>
         </form>
       </div>
     </div>

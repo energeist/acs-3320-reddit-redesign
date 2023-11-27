@@ -24,7 +24,6 @@ body {
 /* navbar */
 
 .nav-bar {
-  /* display: inline-flex; */
   margin: auto;
   background-color: white;
   align-items: center;
@@ -44,7 +43,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
-  margin-left: 50px;
+  margin-left: 32px;
 }
 
 .home {
@@ -58,7 +57,7 @@ body {
   width: 32px;
   height: 32px;
   background-size: cover;
-  margin-right: 37px;
+  /* margin-right: 37px; */
   position: absolute;
   left: -37px;
   top: 50%;
@@ -85,7 +84,7 @@ ul, li {
   align-items: center;
 }
 
-.nav-items > li > a {
+.nav-items > li > a, .home {
   border: 1px solid black;
   border-radius: 3px;
   background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
@@ -94,7 +93,6 @@ ul, li {
   margin: 5px;
   text-decoration: none;
   color: black;
-  min-width: 150px;
 }
 
 /* index posts */
@@ -133,7 +131,7 @@ ul, li {
   border-radius: 3px;
   min-width: 7rem;
   min-height: 2rem;
-  display: flex;background-color: #ffffff;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -210,7 +208,41 @@ small {
   font-size: 0.75rem;
 }
 
+/* post styles */
+
+.post-main {
+  padding: 10px;
+}
+
+.post-voting {
+  border: 1px solid black;
+  background-color: #ffffff;
+  border-radius: 3px;
+  min-width: 6rem;
+  width: 6rem;
+  min-height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+/* comment styles */
+
+.comment-main {
+  border: 1px dashed black;
+  margin: 5px 0 5px 8px;
+  padding: 5px;
+}
+
+.comment-main:hover {
+  background-color: #cccccc;
+}
+
 /* smaller screens and tablets */
+
 @media only screen and (max-width: 600px) {
   .nav-bar-contents {
     display: flex;
