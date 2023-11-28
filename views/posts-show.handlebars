@@ -20,7 +20,7 @@
         <p>{{post.summary}}</p>
         <p>
           {{#if this.author.username}}
-            <small>Author: {{this.author.username}}</small>
+            <small>Author: <span class="author">{{this.author.username}}</span></small>
           {{else}}
             <small>Author: [deleted]</small>
           {{/if}}

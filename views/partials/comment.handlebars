@@ -3,7 +3,7 @@
   <div class="comment-main">
     <p class="comment-info">
       {{#if comment.author }}
-        <small>Author: {{comment.author.username}} </small>
+        <small>Author: <span class="author">{{comment.author.username}}</span> </small>
         <small class="timestamp">@ {{comment.createdAt}}</small>
       {{else}}
         <small>Author: [deleted]</small>
