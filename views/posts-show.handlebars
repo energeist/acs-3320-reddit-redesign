@@ -1,4 +1,4 @@
-<div class="">
+<div >
   <div class="post-main">
     <div class="post-content">
       <div>
@@ -13,7 +13,7 @@
           </span>
           <div>
           {{#each post.subreddits}}
-            <a href="/n/{{this}}" class="">/n/{{this}}</a>
+            <a href="/n/{{this}}" >/n/{{this}}</a>
           {{/each}}
           </div>
         {{/if}}
@@ -37,17 +37,17 @@
       </div>
     </div>
     {{#if post.comments}}
-      <p class="">Comments:</p>
+      <p >Comments:</p>
         {{#each post.comments}}
           {{> comment comment=this postId=../post._id currentUser=../currentUser}}
         {{/each}}
     {{/if}}
     {{#if currentUser}}
-    <p class="">Add a comment:</p>
+    <p >Add a comment:</p>
     <form action="/posts/{{post._id}}/comments" method="post">
       <textarea class="comment-box" name="content" placeholder="Comment"></textarea>
       <div class="comment-submit-button">
-        <button type="submit" class="">Post!</button>
+        <button type="submit" >Post!</button>
       </div>
     </form>
     {{/if}}

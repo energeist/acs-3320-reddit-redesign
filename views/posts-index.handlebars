@@ -1,4 +1,4 @@
-<div class="">
+<div >
   <div class="index-header">
     <h1>The Front Page of the Internet</h1>
     {{#each posts}}
@@ -14,7 +14,7 @@
               {{/if}}
             </span>
           {{#each this.subreddits}}
-            <a href="/n/{{this}}" class="">/n/{{this}}</a>
+            <a href="/n/{{this}}" >/n/{{this}}</a>
           {{/each}}
           </div>
           <a href="{{this.url}}" target="_blank" class="url-text">{{this.url}}</a>
@@ -28,11 +28,11 @@
         </div>
         <div class="index-post-bottom">
           <div class="index-voting">
-            <form class="" data-id="{{this._id}}">
+            <form  data-id="{{this._id}}">
               <button type="submit" class="index-upvote-button"></button>
             </form>
             {{this.voteScore}}
-            <form class="" data-id="{{this._id}}">
+            <form  data-id="{{this._id}}">
               <button type="submit" class="index-downvote-button"></button>
             </form>
           </div>

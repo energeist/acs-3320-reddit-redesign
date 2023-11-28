@@ -1,42 +1,39 @@
-<div class="">
-  <div class="">
-    <form action="/login" method="post">
-      <legend>New User</legend>
-      <div class="">
-        <label for="user-username">Username</label>
-        <input
-          type="text"
-          name="username"
-          class=""
-          id="user-username"
-          placeholder="Username"
-        />
-      </div>
-      <div class="">
-        <label for="user-password">Password</label>
-        <input
-          type="text"
-          name="password"
-          class=""
-          id="user-password"
-          placeholder="password"
-        />
-      </div>
-      <div class="">
-        <input
-          class=""
-          type="checkbox"
-          name="rememberMe"
-          value="true"
-          id="rememberMe"
-        />
-        <label class="" for="rememberMe">
-          Remember me
-        </label>
-      </div>
-      <div class="">
-        <button type="submit" class="">Login</button>
-      </div>
-    </form>
-  </div>
+<div class="form-container">
+  <form action="/login" method="post">
+    <legend>Login to Readthat!</legend>
+    <div >
+      <label for="user-username">Username</label>
+      <input
+        type="text"
+        name="username"
+        
+        id="user-username"
+        placeholder="Username"
+      />
+    </div>
+    <div >
+      <label for="user-password">Password</label>
+      <input
+        type="text"
+        name="password"
+        
+        id="user-password"
+        placeholder="password"
+      />
+    </div>
+    <div class="remember-login">
+      <label  for="rememberMe">
+        Remember me:
+      </label>
+      <input
+        type="checkbox"
+        name="rememberMe"
+        value="true"
+        id="rememberMe"
+      />
+    </div>
+    <div >
+      <button type="submit" >Login</button>
+    </div>
+  </form>
 </div>
