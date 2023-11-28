@@ -277,7 +277,6 @@ textarea {
 .comment-main:hover {
   background-color: #cccccc;
   padding: 5px;
-  /* padding-left: 3px; */
   margin-left: 6px;
   border-left: 3px solid blue;
   transition: background-color 0.2s ease-in-out;
