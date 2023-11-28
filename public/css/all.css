@@ -247,8 +247,9 @@ textarea {
 }
 
 .comment-main {
+  position: relative;
   background-color: white;
-  margin: 5px 0px 0px 8px;
+  margin: 5px 0px 20px 8px;
   border-left: 1px solid black;
   border-radius: 5px;
   padding: 5px;
@@ -258,19 +259,21 @@ textarea {
 
 .comment-main::before {
   content: "";
-  background-image: url("/images/comment-bubble.png");
+  background-color: white;
+  border-radius: 16px;
+  background-image: url("/images/circle-person.png");
   display: inline-block;
   width: 32px;
   height: 32px;
   background-size: cover;
   position: absolute;
-  left: -37px;
-  top: 0;
+  left: -16px;
+  top: -16px;
 }
 
 .comment-main:hover {
   background-color: #cccccc;
-  border-left: 1px solid blue;
+  border-left: 3px solid blue;
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -280,6 +283,10 @@ textarea {
 
 .comment-indent {
   min-width: 10px;
+}
+
+.timestamp {
+  color: gray;
 }
 
 /* sign-up & login forms */
