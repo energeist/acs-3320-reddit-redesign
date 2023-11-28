@@ -249,16 +249,33 @@ textarea {
 .comment-main {
   background-color: white;
   margin: 5px 0px 0px 8px;
-  border: 1px solid black;
+  border-left: 1px solid black;
   border-radius: 5px;
   padding: 5px;
   flex: 1;
   flex-direction: column;
 }
 
+.comment-main::before {
+  content: "";
+  background-image: url("/images/comment-bubble.png");
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+  position: absolute;
+  left: -37px;
+  top: 0;
+}
+
 .comment-main:hover {
   background-color: #cccccc;
+  border-left: 1px solid blue;
   transition: background-color 0.2s ease-in-out;
+}
+
+.comment-info {
+  margin-block-start: 0.25em;
 }
 
 .comment-indent {
@@ -315,6 +332,7 @@ input[type="text"] {
   /* width: 100%; */  
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 input[type="checkbox"] {

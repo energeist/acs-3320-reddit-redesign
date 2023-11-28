@@ -1,18 +1,19 @@
 <div class="comment-wrapper">
   <div class="comment-indent"></div>
   <div class="comment-main">
-    <p>{{comment.content}}</p>
     <p class="comment-info">
       {{#if comment.author }}
-        Author: {{comment.author.username}}
+        <small>Author: {{comment.author.username}} </small>
+        <small class="timestamp">@ {{comment.createdAt}}</small>
       {{else}}
-        Author: [deleted]
+        <small>Author: [deleted]</small>
       {{/if}}
     </p>
+    <p>{{comment.content}}</p>
     {{#if currentUser}}
       <a href="/posts/{{postId}}/comments/{{comment._id}}/replies/new">Reply</a>
-    {{else}}
-      <p>Login to reply!</p>
+    {{!-- {{else}}
+      <p>Login to reply!</p> --}}
     {{/if}}
     {{#each comment.comments}}
       {{> comment comment=this postId=../postId currentUser=../currentUser}}

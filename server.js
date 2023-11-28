@@ -14,6 +14,7 @@ require('./data/reddit-db');
 const hbs = handlebars.create({
     helpers: {}
 });
+
 const checkAuth = require('./middleware/checkAuth');
 
 // App config here
