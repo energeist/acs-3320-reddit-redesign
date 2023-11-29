@@ -239,7 +239,7 @@ small {
 /* post styles */
 
 textarea {
-  width: calc(100% - 6px);
+  width: calc(100%);
 }
 
 .post-main {
@@ -348,6 +348,8 @@ input[type="text"] {
   width: 100%;
 }
 
+
+
 .form-submit {
   width: 100%;
   margin-top: 5px;
@@ -411,4 +413,12 @@ button[type="submit"]:active {
   .comment-main {
     margin: 5px 0px 0px 0px;
   };
+
+  .comment-main:hover {
+    background-color: #cccccc;
+    padding: 5px;
+    margin-left: 6px;
+    border-left: 1px solid blue;
+    transition: background-color 0.2s ease-in-out;
+  }
 }
