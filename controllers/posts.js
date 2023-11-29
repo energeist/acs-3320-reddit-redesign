@@ -54,10 +54,14 @@ module.exports = (app) => {
     try {
       const currentUser = req.user;
       const post = await Post.findById(req.params.id).populate('comments').lean();
+      const firstSubreddit = post.subreddits[0];
+      const remainingSubreddits = post.subreddits.slice(1);
       return res.render('posts-show', { 
         post, 
-        currentUser, 
-        upvoted: currentUser ? post.upVotes.includes(currentUser._id) : null, // still working on this
+        currentUser,
+        firstSubreddit,
+        remainingSubreddits,
+        upvoted: currentUser ? post.upVotes.includes(currentUser._id) : null,
         downvoted: currentUser ? post.downVotes.includes(currentUser._id) : null});
     } catch(err) {
       console.log(err.message);
