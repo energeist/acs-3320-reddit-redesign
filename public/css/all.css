@@ -269,7 +269,7 @@ textarea {
 .comment-main {
   position: relative;
   background-color: white;
-  margin: 5px 0px 20px 8px;
+  margin: 21px 0px 0px 8px;
   border-left: 1px solid black;
   border-radius: 5px;
   padding: 5px;
@@ -410,15 +410,7 @@ button[type="submit"]:active {
     top: 0;
   }
 
-  .comment-main {
-    margin: 5px 0px 0px 0px;
+  .comment-indent {
+    min-width: 5px;
   };
-
-  .comment-main:hover {
-    background-color: #cccccc;
-    padding: 5px;
-    margin-left: 6px;
-    border-left: 1px solid blue;
-    transition: background-color 0.2s ease-in-out;
-  }
 }
